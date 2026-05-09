@@ -5,6 +5,7 @@ namespace App\Filament\Resources\PaymentResource\Pages;
 use App\Filament\Resources\PaymentResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Support\Facades\Storage;
 
 class EditPayment extends EditRecord
 {
@@ -17,6 +18,11 @@ class EditPayment extends EditRecord
                 ->label('Lihat'),
             Actions\DeleteAction::make()
                 ->label('Hapus')
+                ->after(function ($record) {
+                    if ($record->proof_image) {
+                        Storage::disk('public')->delete($record->proof_image);
+                    }
+                })
                 ->requiresConfirmation()
                 ->modalHeading('Hapus Pembayaran')
                 ->modalDescription('Yakin ingin menghapus data pembayaran ini?')

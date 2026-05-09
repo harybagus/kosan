@@ -5,6 +5,7 @@ namespace App\Filament\Resources\RoomResource\Pages;
 use App\Filament\Resources\RoomResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Support\Facades\Storage;
 
 class EditRoom extends EditRecord
 {
@@ -17,6 +18,11 @@ class EditRoom extends EditRecord
                 ->label('Lihat'),
             Actions\DeleteAction::make()
                 ->label('Hapus')
+                ->after(function ($record) {
+                    if ($record->image) {
+                        Storage::disk('public')->delete($record->image);
+                    }
+                })
                 ->requiresConfirmation()
                 ->modalHeading('Hapus Kamar')
                 ->modalDescription('Yakin ingin menghapus kamar ini?')

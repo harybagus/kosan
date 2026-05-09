@@ -8,6 +8,7 @@ use App\Models\Tenant;
 use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Support\Facades\Storage;
 
 class EditTenant extends EditRecord
 {
@@ -23,6 +24,11 @@ class EditTenant extends EditRecord
 
             Actions\DeleteAction::make()
                 ->label('Hapus')
+                ->after(function ($record) {
+                    if ($record->id_card_image) {
+                        Storage::disk('public')->delete($record->id_card_image);
+                    }
+                })
                 ->requiresConfirmation()
                 ->modalHeading('Hapus Penghuni')
                 ->modalDescription('Yakin ingin menghapus data penghuni ini? Kamar yang ditempati akan otomatis menjadi tersedia kembali.')
