@@ -48,7 +48,10 @@ class AdminPanelProvider extends PanelProvider
                 for: 'App\\Filament\\Widgets'
             )
             ->widgets([
-                Widgets\AccountWidget::class,
+                \App\Filament\Widgets\StatsOverview::class,
+                \App\Filament\Widgets\RevenueChart::class,
+                \App\Filament\Widgets\LatestPaymentsTable::class,
+                \App\Filament\Widgets\AvailableRoomsTable::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -63,6 +66,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->spa();
     }
 }
