@@ -229,9 +229,8 @@ class PaymentResource extends Resource
 
             ])
             ->filters([
-
                 Tables\Filters\SelectFilter::make('status')
-                    ->label('Status')
+                    ->label('Status Pembayaran')
                     ->options([
                         'pending'  => 'Pending',
                         'due_soon' => 'Jatuh Tempo',
@@ -243,19 +242,85 @@ class PaymentResource extends Resource
                     ->label('Metode Pembayaran')
                     ->options([
                         'cash'     => 'Tunai',
-                        'transfer' => 'Transfer',
+                        'transfer' => 'Transfer Bank',
                         'qris'     => 'QRIS',
                     ]),
 
-                Tables\Filters\Filter::make('due_this_month')
-                    ->label('Jatuh Tempo Bulan Ini')
-                    ->query(
-                        fn(Builder $query) => $query
-                            ->whereMonth('due_date', now()->month)
-                            ->whereYear('due_date', now()->year)
-                    ),
+                Tables\Filters\SelectFilter::make('tenant_id')
+                    ->label('Penghuni')
+                    ->relationship('tenant', 'name')
+                    ->searchable()
+                    ->preload(),
 
+                Tables\Filters\SelectFilter::make('room_id')
+                    ->label('Kamar')
+                    ->options(
+                        \App\Models\Room::orderBy('room_number')
+                            ->get()
+                            ->mapWithKeys(fn($room) => [
+                                $room->id => "Kamar {$room->room_number} ({$room->type})",
+                            ])
+                    )
+                    ->searchable(),
+
+                Tables\Filters\Filter::make('due_date_range')
+                    ->form([
+                        Forms\Components\DatePicker::make('due_from')
+                            ->label('Jatuh Tempo: Dari')
+                            ->displayFormat('d M Y'),
+                        Forms\Components\DatePicker::make('due_until')
+                            ->label('Jatuh Tempo: Sampai')
+                            ->displayFormat('d M Y'),
+                    ])
+                    ->query(function (Builder $query, array $data) {
+                        return $query
+                            ->when($data['due_from'],  fn($q) => $q->whereDate('due_date', '>=', $data['due_from']))
+                            ->when($data['due_until'], fn($q) => $q->whereDate('due_date', '<=', $data['due_until']));
+                    })
+                    ->columns(2)
+                    ->columnSpan(2),
+
+                Tables\Filters\Filter::make('paid_date_range')
+                    ->form([
+                        Forms\Components\DatePicker::make('paid_from')
+                            ->label('Tanggal Bayar: Dari')
+                            ->displayFormat('d M Y'),
+                        Forms\Components\DatePicker::make('paid_until')
+                            ->label('Tanggal Bayar: Sampai')
+                            ->displayFormat('d M Y'),
+                    ])
+                    ->query(function (Builder $query, array $data) {
+                        return $query
+                            ->when($data['paid_from'],  fn($q) => $q->whereDate('paid_date', '>=', $data['paid_from']))
+                            ->when($data['paid_until'], fn($q) => $q->whereDate('paid_date', '<=', $data['paid_until']));
+                    })
+                    ->columns(2)
+                    ->columnSpan(2),
+
+                Tables\Filters\TernaryFilter::make('this_month')
+                    ->label('Data Pembayaran')
+                    ->placeholder('All')
+                    ->trueLabel('Bulan Ini')
+                    ->falseLabel('Selain Bulan Ini')
+                    ->queries(
+                        true: fn(Builder $query) => $query->whereMonth('due_date', now()->month)->whereYear('due_date', now()->year),
+                        false: fn(Builder $query) => $query->whereNot(fn($q) => $q->whereMonth('due_date', now()->month)->whereYear('due_date', now()->year)),
+                    ),
             ])
+            ->filtersLayout(Tables\Enums\FiltersLayout::AboveContentCollapsible)
+            ->filtersTriggerAction(
+                fn(Tables\Actions\Action $action) => $action
+                    ->button()
+                    ->label('Filter')
+                    ->icon('heroicon-o-funnel'),
+            )
+            ->filtersLayout(Tables\Enums\FiltersLayout::AboveContentCollapsible)
+            ->filtersTriggerAction(
+                fn(Tables\Actions\Action $action) => $action
+                    ->button()
+                    ->label('Filter')
+                    ->icon('heroicon-o-funnel'),
+            )
             ->actions([
                 Tables\Actions\ViewAction::make()
                     ->label('Lihat'),
@@ -263,7 +328,6 @@ class PaymentResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->label('Edit'),
 
-                // Aksi cepat tandai lunas
                 Tables\Actions\Action::make('mark_paid')
                     ->label('Tandai Lunas')
                     ->icon('heroicon-o-check-circle')
@@ -300,7 +364,6 @@ class PaymentResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
 
-                    // Bulk tandai lunas
                     Tables\Actions\BulkAction::make('bulk_mark_paid')
                         ->label('Tandai Lunas')
                         ->icon('heroicon-o-check-circle')
@@ -340,6 +403,11 @@ class PaymentResource extends Resource
                 ]),
             ])
             ->defaultSort('due_date', 'asc')
+            ->recordClasses(fn(Payment $record) => match ($record->status) {
+                'overdue'  => 'bg-red-50 dark:bg-red-950/30 border-l-4 border-l-red-500',
+                'due_soon' => 'bg-yellow-50 dark:bg-yellow-950/30 border-l-4 border-l-yellow-500',
+                default    => '',
+            })
             ->emptyStateIcon('heroicon-o-banknotes')
             ->emptyStateHeading('Belum ada data pembayaran')
             ->emptyStateDescription('Mulai dengan menambahkan tagihan pembayaran.')

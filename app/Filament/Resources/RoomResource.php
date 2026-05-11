@@ -11,7 +11,7 @@ use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-// use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
 
@@ -193,7 +193,6 @@ class RoomResource extends Resource
 
             ])
             ->filters([
-
                 Tables\Filters\SelectFilter::make('type')
                     ->label('Tipe')
                     ->options([
@@ -208,7 +207,32 @@ class RoomResource extends Resource
                         'occupied'  => 'Terisi',
                     ]),
 
+                Tables\Filters\Filter::make('price_range')
+                    ->form([
+                        Forms\Components\TextInput::make('price_from')
+                            ->label('Harga: Minimum')
+                            ->numeric()
+                            ->prefix('Rp'),
+                        Forms\Components\TextInput::make('price_until')
+                            ->label('Harga: Maksimum')
+                            ->numeric()
+                            ->prefix('Rp'),
+                    ])
+                    ->query(function (Builder $query, array $data) {
+                        return $query
+                            ->when($data['price_from'],  fn($q) => $q->where('price', '>=', $data['price_from']))
+                            ->when($data['price_until'], fn($q) => $q->where('price', '<=', $data['price_until']));
+                    })
+                    ->columns(2)
+                    ->columnSpan(2),
             ])
+            ->filtersLayout(Tables\Enums\FiltersLayout::AboveContentCollapsible)
+            ->filtersTriggerAction(
+                fn(Tables\Actions\Action $action) => $action
+                    ->button()
+                    ->label('Filter')
+                    ->icon('heroicon-o-funnel'),
+            )
             ->actions([
                 Tables\Actions\ViewAction::make()
                     ->label('Lihat'),

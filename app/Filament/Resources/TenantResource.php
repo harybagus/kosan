@@ -11,7 +11,7 @@ use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-// use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
 
@@ -216,7 +216,6 @@ class TenantResource extends Resource
 
             ])
             ->filters([
-
                 Tables\Filters\SelectFilter::make('status')
                     ->label('Status')
                     ->options([
@@ -227,9 +226,43 @@ class TenantResource extends Resource
                 Tables\Filters\SelectFilter::make('room_id')
                     ->label('Kamar')
                     ->relationship('room', 'room_number')
-                    ->searchable(),
+                    ->searchable()
+                    ->preload(),
 
+                Tables\Filters\Filter::make('start_date_range')
+                    ->form([
+                        Forms\Components\DatePicker::make('start_from')
+                            ->label('Masuk: Dari Tanggal')
+                            ->displayFormat('d/m/Y'),
+                        Forms\Components\DatePicker::make('start_until')
+                            ->label('Masuk: Sampai Tanggal')
+                            ->displayFormat('d/m/Y'),
+                    ])
+                    ->query(function (Builder $query, array $data) {
+                        return $query
+                            ->when($data['start_from'],  fn($q) => $q->whereDate('start_date', '>=', $data['start_from']))
+                            ->when($data['start_until'], fn($q) => $q->whereDate('start_date', '<=', $data['start_until']));
+                    })
+                    ->columns(2)
+                    ->columnSpan(2),
+
+                Tables\Filters\TernaryFilter::make('active_room_type')
+                    ->label('Tipe Kamar')
+                    ->placeholder('All')
+                    ->trueLabel('Premium')
+                    ->falseLabel('Standard')
+                    ->queries(
+                        true: fn(Builder $query) => $query->whereHas('room', fn($q) => $q->where('type', 'premium')),
+                        false: fn(Builder $query) => $query->whereHas('room', fn($q) => $q->where('type', '!=', 'premium')),
+                    ),
             ])
+            ->filtersLayout(Tables\Enums\FiltersLayout::AboveContentCollapsible)
+            ->filtersTriggerAction(
+                fn(Tables\Actions\Action $action) => $action
+                    ->button()
+                    ->label('Filter')
+                    ->icon('heroicon-o-funnel'),
+            )
             ->actions([
                 Tables\Actions\ViewAction::make()
                     ->label('Lihat'),
