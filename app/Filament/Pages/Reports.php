@@ -97,7 +97,8 @@ class Reports extends Page implements HasForms
                 ->count();
 
             $data[] = [
-                'month'        => Carbon::create($year, $month)->translatedFormat('F Y'),
+                'month'        => Carbon::create($year, $month)->translatedFormat('F'),
+                'year'         => Carbon::create($year, $month)->translatedFormat('Y'),
                 'month_short'  => Carbon::create($year, $month)->translatedFormat('M'),
                 'revenue'      => $paid,
                 'paid_count'   => $paidCount,
@@ -171,14 +172,14 @@ class Reports extends Page implements HasForms
                 ->label('Export PDF')
                 ->icon('heroicon-o-document-arrow-down')
                 ->color('danger')
-                ->url(fn() => route('reports.export.pdf', ['year' => $this->selectedYear]))
+                ->url(fn() => route('reports.export.pdf', $this->selectedYear))
                 ->openUrlInNewTab(),
 
             Action::make('export_excel')
                 ->label('Export Excel')
                 ->icon('heroicon-o-table-cells')
                 ->color('success')
-                ->url(fn() => route('reports.export.excel', ['year' => $this->selectedYear]))
+                ->url(fn() => route('reports.export.excel', $this->selectedYear))
                 ->openUrlInNewTab(),
         ];
     }

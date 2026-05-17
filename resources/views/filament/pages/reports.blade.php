@@ -331,6 +331,10 @@
                             Bulan
                         </th>
 
+                        <th class="px-6 py-4 text-left">
+                            Tahun
+                        </th>
+
                         <th class="px-6 py-4 text-right">
                             Pendapatan
                         </th>
@@ -358,6 +362,10 @@
 
                             <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                                 {{ $row['month'] }}
+                            </td>
+
+                            <td class="px-6 py-4 text-gray-500 dark:text-gray-400">
+                                {{ $row['year'] }}
                             </td>
 
                             <td class="px-6 py-4 text-right">

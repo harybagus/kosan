@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReportExportController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -7,11 +8,9 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/admin/reports/export/pdf', function () {
-        return redirect('/admin/reports');
-    })->name('reports.export.pdf');
+    Route::get('/admin/reports/export/pdf/{year}', [ReportExportController::class, 'exportPdf'])
+        ->name('reports.export.pdf');
 
-    Route::get('/admin/reports/export/excel', function () {
-        return redirect('/admin/reports');
-    })->name('reports.export.excel');
+    Route::get('/admin/reports/export/excel/{year}', [ReportExportController::class, 'exportExcel'])
+        ->name('reports.export.excel');
 });
