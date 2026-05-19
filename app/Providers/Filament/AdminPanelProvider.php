@@ -30,6 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login(Login::class)
+            ->authGuard('web')
             ->brandName('Kosan')
             ->colors([
                 'primary' => Color::Blue,

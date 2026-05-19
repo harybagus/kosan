@@ -15,6 +15,7 @@ class Reports extends Page implements HasForms
 {
     use InteractsWithForms;
 
+    protected static ?string $navigationGroup = 'Monitoring';
     protected static ?string $navigationIcon  = 'heroicon-o-chart-bar';
     protected static ?string $navigationLabel = 'Laporan & Analitik';
     protected static ?string $title           = 'Laporan & Analitik';
@@ -29,6 +30,11 @@ class Reports extends Page implements HasForms
     {
         $this->selectedYear  = (string) now()->year;
         $this->selectedMonth = '';
+    }
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->can('view_reports') ?? false;
     }
 
     // =========================================================

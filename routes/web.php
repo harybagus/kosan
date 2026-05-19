@@ -7,6 +7,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/login', function () {
+    return redirect('/admin/login');
+})->name('login');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/reports/export/pdf/{year}', [ReportExportController::class, 'exportPdf'])
         ->name('reports.export.pdf');

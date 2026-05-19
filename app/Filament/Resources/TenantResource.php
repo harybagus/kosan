@@ -18,16 +18,32 @@ use Illuminate\Support\Facades\Storage;
 class TenantResource extends Resource
 {
     protected static ?string $model = Tenant::class;
-
+    protected static ?string $navigationGroup = 'Manajemen';
     protected static ?string $navigationIcon = 'heroicon-o-users';
-
     protected static ?string $navigationLabel = 'Manajemen Penghuni';
-
     protected static ?string $modelLabel = 'Penghuni';
-
     protected static ?string $pluralModelLabel = 'Penghuni';
-
     protected static ?int $navigationSort = 2;
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()?->can('view_tenant') ?? false;
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()?->can('create_tenant') ?? false;
+    }
+
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->user()?->can('edit_tenant') ?? false;
+    }
+
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->user()?->can('delete_tenant') ?? false;
+    }
 
     // =========================================================
     // FORM

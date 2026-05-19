@@ -17,6 +17,7 @@ class KosNotificationResource extends Resource
 
     protected static ?string $model = KosNotification::class;
 
+    protected static ?string $navigationGroup = 'Monitoring';
     protected static ?string $navigationIcon  = 'heroicon-o-bell';
     protected static ?string $navigationLabel = 'Notifikasi';
     protected static ?string $modelLabel      = 'Notifikasi';
@@ -33,6 +34,11 @@ class KosNotificationResource extends Resource
     public static function getNavigationBadgeColor(): ?string
     {
         return 'danger';
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()?->can('view_notifications') ?? false;
     }
 
     // =========================================================

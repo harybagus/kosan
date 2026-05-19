@@ -6,7 +6,6 @@ use App\Filament\Resources\RoomResource\Pages;
 use App\Models\Room;
 use Filament\Forms;
 use Filament\Forms\Form;
-// use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -18,16 +17,34 @@ use Illuminate\Support\Facades\Storage;
 class RoomResource extends Resource
 {
     protected static ?string $model = Room::class;
-
+    protected static ?string $navigationGroup = 'Manajemen';
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
-
     protected static ?string $navigationLabel = 'Manajemen Kamar';
-
     protected static ?string $modelLabel = 'Kamar';
-
     protected static ?string $pluralModelLabel = 'Kamar';
-
     protected static ?int $navigationSort = 1;
+
+    public static function canViewAny(): bool
+    {
+        /** @var \App\Models\User|null $user */
+        $user = auth()->user();
+        return $user?->can('view_room') ?? false;
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()?->can('create_room') ?? false;
+    }
+
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->user()?->can('edit_room') ?? false;
+    }
+
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->user()?->can('delete_room') ?? false;
+    }
 
     // =========================================================
     // FORM

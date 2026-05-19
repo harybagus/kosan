@@ -20,16 +20,32 @@ use Illuminate\Support\Facades\Storage;
 class PaymentResource extends Resource
 {
     protected static ?string $model = Payment::class;
-
+    protected static ?string $navigationGroup = 'Manajemen';
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
-
     protected static ?string $navigationLabel = 'Manajemen Pembayaran';
-
     protected static ?string $modelLabel = 'Pembayaran';
-
     protected static ?string $pluralModelLabel = 'Pembayaran';
-
     protected static ?int $navigationSort = 3;
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()?->can('view_payment') ?? false;
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()?->can('create_payment') ?? false;
+    }
+
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->user()?->can('edit_payment') ?? false;
+    }
+
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->user()?->can('delete_payment') ?? false;
+    }
 
     // =========================================================
     // FORM
