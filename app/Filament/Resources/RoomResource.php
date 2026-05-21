@@ -26,9 +26,7 @@ class RoomResource extends Resource
 
     public static function canViewAny(): bool
     {
-        /** @var \App\Models\User|null $user */
-        $user = auth()->user();
-        return $user?->can('view_room') ?? false;
+        return auth()->user()?->can('view_room') ?? false;
     }
 
     public static function canCreate(): bool
@@ -77,6 +75,12 @@ class RoomResource extends Resource
                             ->afterStateUpdated(function (Set $set, ?string $state) {
                                 if ($state === 'standard') {
                                     $set('facilities', []);
+
+                                    \Filament\Notifications\Notification::make()
+                                        ->title('Fasilitas direset')
+                                        ->body('Fasilitas AC tidak tersedia untuk kamar Standard.')
+                                        ->warning()
+                                        ->send();
                                 }
                             }),
 

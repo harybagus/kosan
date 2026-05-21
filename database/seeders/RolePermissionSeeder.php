@@ -51,6 +51,12 @@ class RolePermissionSeeder extends Seeder
             'create_users',
             'edit_users',
             'delete_users',
+
+            // Facility
+            'view_facility',
+            'create_facility',
+            'edit_facility',
+            'delete_facility',
         ];
 
         foreach ($permissions as $permission) {
@@ -85,6 +91,10 @@ class RolePermissionSeeder extends Seeder
             'export_reports',
             'view_notifications',
             'manage_notifications',
+            'view_facility',
+            'create_facility',
+            'edit_facility',
+            'delete_facility',
         ]);
 
         // Staff — hanya view & operasional dasar

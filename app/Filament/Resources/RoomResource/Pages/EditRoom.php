@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\RoomResource\Pages;
 
 use App\Filament\Resources\RoomResource;
+use App\Models\Facility;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Facades\Storage;
@@ -10,6 +11,8 @@ use Illuminate\Support\Facades\Storage;
 class EditRoom extends EditRecord
 {
     protected static string $resource = RoomResource::class;
+
+    protected string $oldImage = '';
 
     protected function getHeaderActions(): array
     {
@@ -28,6 +31,25 @@ class EditRoom extends EditRecord
                 ->modalDescription('Yakin ingin menghapus kamar ini?')
                 ->modalSubmitActionLabel('Ya, Hapus'),
         ];
+    }
+
+    protected function beforeSave(): void
+    {
+        $this->oldImage = $this->record->image ?? '';
+    }
+
+    protected function afterSave(): void
+    {
+        if ($this->oldImage && $this->oldImage !== $this->record->image) {
+            Storage::disk('public')->delete($this->oldImage);
+        }
+
+        if ($this->record->type === 'standard') {
+            $acFacility = Facility::where('name', 'AC')->first();
+            if ($acFacility) {
+                $this->record->facilities()->detach($acFacility->id);
+            }
+        }
     }
 
     protected function getRedirectUrl(): string

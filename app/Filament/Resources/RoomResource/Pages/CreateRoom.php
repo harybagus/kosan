@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\RoomResource\Pages;
 
 use App\Filament\Resources\RoomResource;
+use App\Models\Facility;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateRoom extends CreateRecord
@@ -14,14 +15,24 @@ class CreateRoom extends CreateRecord
         return $this->getResource()::getUrl('index');
     }
 
+    protected function getCreatedNotificationTitle(): ?string
+    {
+        return 'Kamar berhasil ditambahkan';
+    }
+
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['status'] ??= 'available';
         return $data;
     }
 
-    protected function getCreatedNotificationTitle(): ?string
+    protected function afterCreate(): void
     {
-        return 'Kamar berhasil ditambahkan';
+        if ($this->record->type === 'standard') {
+            $acFacility = Facility::where('name', 'AC')->first();
+            if ($acFacility) {
+                $this->record->facilities()->detach($acFacility->id);
+            }
+        }
     }
 }
