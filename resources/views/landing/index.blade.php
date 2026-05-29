@@ -177,4 +177,139 @@
         </div>
     </section>
 
+    {{-- ============================================================
+     ADVANTAGES SECTION
+    ============================================================ --}}
+    <section id="fasilitas" class="py-16 sm:py-20 bg-gray-50 dark:bg-gray-950">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+            {{-- Header --}}
+            <div class="text-center mb-12">
+                <div
+                    class="inline-block text-xs font-semibold text-blue-600 dark:text-blue-400 tracking-widest uppercase mb-3">
+                    Keunggulan Kami
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                    Kenapa Memilih Kosan?
+                </h2>
+                <p class="text-gray-500 dark:text-gray-400 max-w-xl mx-auto leading-relaxed">
+                    Kami hadir dengan sistem manajemen modern yang memudahkan penghuni dan pengelola dalam satu platform
+                    terintegrasi.
+                </p>
+            </div>
+
+            {{-- Grid Keunggulan --}}
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+                {{-- 1 — Lokasi Strategis --}}
+                <div
+                    class="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-md dark:hover:shadow-none transition-all duration-200">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                        <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor"
+                            stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Lokasi Strategis</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                        Terletak di pusat kota, dekat kampus, perkantoran, dan pusat perbelanjaan. Akses mudah ke
+                        transportasi umum.
+                    </p>
+                </div>
+
+                {{-- 2 — Keamanan 24 Jam --}}
+                <div
+                    class="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 hover:border-green-300 dark:hover:border-green-700 hover:shadow-md dark:hover:shadow-none transition-all duration-200">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-green-100 dark:bg-green-900/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                        <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor"
+                            stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Keamanan 24 Jam</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                        CCTV di area strategis, akses kunci digital, dan petugas keamanan berjaga setiap hari tanpa henti.
+                    </p>
+                </div>
+
+                {{-- 3 — Manajemen Digital --}}
+                <div
+                    class="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 hover:border-purple-300 dark:hover:border-purple-700 hover:shadow-md dark:hover:shadow-none transition-all duration-200">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-900/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                        <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor"
+                            stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0H3" />
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Manajemen Digital</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                        Pembayaran, tagihan, dan laporan tersedia secara digital. Transparansi penuh untuk penghuni dan
+                        pemilik.
+                    </p>
+                </div>
+
+                {{-- 4 — WiFi Super Cepat --}}
+                <div
+                    class="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 hover:border-cyan-300 dark:hover:border-cyan-700 hover:shadow-md dark:hover:shadow-none transition-all duration-200">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-cyan-100 dark:bg-cyan-900/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                        <svg class="w-5 h-5 text-cyan-600 dark:text-cyan-400" fill="none" stroke="currentColor"
+                            stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M8.288 15.038a5.25 5.25 0 017.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 011.06 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 dark:text-white mb-2">WiFi Super Cepat</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                        Internet fiber optik berkecepatan tinggi tersedia di seluruh area. Cocok untuk kerja, kuliah, maupun
+                        hiburan.
+                    </p>
+                </div>
+
+                {{-- 5 — Lingkungan Nyaman --}}
+                <div
+                    class="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 hover:border-pink-300 dark:hover:border-pink-700 hover:shadow-md dark:hover:shadow-none transition-all duration-200">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-pink-100 dark:bg-pink-900/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                        <svg class="w-5 h-5 text-pink-600 dark:text-pink-400" fill="none" stroke="currentColor"
+                            stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Lingkungan Nyaman</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                        Area bersih, taman hijau, dan komunitas penghuni yang ramah. Suasana tenang untuk istirahat dan
+                        produktivitas.
+                    </p>
+                </div>
+
+                {{-- 6 — Harga Transparan --}}
+                <div
+                    class="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 hover:border-orange-300 dark:hover:border-orange-700 hover:shadow-md dark:hover:shadow-none transition-all duration-200">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-orange-100 dark:bg-orange-900/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                        <svg class="w-5 h-5 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor"
+                            stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Harga Transparan</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                        Tidak ada biaya tersembunyi. Harga jelas, pembayaran mudah, dan laporan bulanan tersedia kapan saja.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
 @endsection
