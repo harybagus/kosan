@@ -26,23 +26,29 @@
         </div>
 
         {{-- Password --}}
-        <div x-data="{ show: false }">
+        <div>
             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                 Kata Sandi <span class="text-red-500">*</span>
             </label>
             <div class="relative">
-                <input x-bind:type="show ? 'text' : 'password'" wire:model="data.password" required
+                <input id="password-input" type="password" wire:model="data.password" required
                     autocomplete="current-password" placeholder="••••••••"
                     class="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-3.5 py-2.5 pr-11 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20">
-                <button type="button" x-on:click="show = !show"
-                    class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
-                    tabindex="-1">
-                    <svg x-show="!show" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"
+                <button type="button" tabindex="-1"
+                    onclick="
+                const i = document.getElementById('password-input');
+                const e = document.getElementById('eye-open');
+                const c = document.getElementById('eye-closed');
+                if (i.type === 'password') { i.type = 'text'; e.classList.add('hidden'); c.classList.remove('hidden'); }
+                else { i.type = 'password'; e.classList.remove('hidden'); c.classList.add('hidden'); }
+            "
+                    class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300">
+                    <svg id="eye-open" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"
                         viewBox="0 0 24 24">
                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                         <circle cx="12" cy="12" r="3" />
                     </svg>
-                    <svg x-show="show" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"
+                    <svg id="eye-closed" class="h-4 w-4 hidden" fill="none" stroke="currentColor" stroke-width="2"
                         viewBox="0 0 24 24">
                         <path
                             d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24" />
@@ -65,7 +71,7 @@
         </div>
 
         {{-- Submit button --}}
-        <button type="submit" wire:click="authenticate" wire:loading.attr="disabled"
+        <button type="submit" wire:loading.attr="disabled"
             class="w-full rounded-lg bg-blue-700 dark:bg-blue-800 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-800 dark:hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 disabled:opacity-70 disabled:cursor-not-allowed">
             <span wire:loading.remove wire:target="authenticate">
                 Masuk ke Dashboard
