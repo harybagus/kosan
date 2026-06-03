@@ -312,4 +312,208 @@
         </div>
     </section>
 
+    {{-- ============================================================
+     ROOM LISTING & FILTER
+    ============================================================ --}}
+    <section id="kamar" class="py-16 sm:py-20 bg-white dark:bg-gray-900">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+            {{-- Header & Filter --}}
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
+
+                <div>
+                    <div class="text-xs font-semibold text-blue-600 dark:text-blue-400 tracking-widest uppercase mb-2">
+                        Pilihan Kamar
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
+                        Kamar Tersedia
+                    </h2>
+                </div>
+
+                {{-- Filter Tabs --}}
+                <div x-data="{ active: 'all' }" class="flex gap-2">
+                    <button x-on:click="active = 'all'; filterRooms('all')"
+                        x-bind:class="active === 'all'
+                            ?
+                            'bg-blue-600 text-white border-blue-600' :
+                            'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 border-gray-300 dark:border-gray-600 hover:border-blue-400 dark:hover:border-blue-500'"
+                        class="px-4 py-1.5 rounded-lg text-sm font-medium border transition-all duration-200">
+                        Semua
+                    </button>
+                    <button x-on:click="active = 'standard'; filterRooms('standard')"
+                        x-bind:class="active === 'standard'
+                            ?
+                            'bg-blue-600 text-white border-blue-600' :
+                            'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 border-gray-300 dark:border-gray-600 hover:border-blue-400 dark:hover:border-blue-500'"
+                        class="px-4 py-1.5 rounded-lg text-sm font-medium border transition-all duration-200">
+                        Standard
+                    </button>
+                    <button x-on:click="active = 'premium'; filterRooms('premium')"
+                        x-bind:class="active === 'premium'
+                            ?
+                            'bg-blue-600 text-white border-blue-600' :
+                            'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 border-gray-300 dark:border-gray-600 hover:border-blue-400 dark:hover:border-blue-500'"
+                        class="px-4 py-1.5 rounded-lg text-sm font-medium border transition-all duration-200">
+                        Premium
+                    </button>
+                </div>
+
+            </div>
+
+            {{-- Room Grid --}}
+            <div id="roomsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                @forelse($availableRooms as $room)
+                    <div class="room-card group bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
+                        data-type="{{ $room->type }}">
+                        {{-- Image --}}
+                        <div
+                            class="relative h-48 flex items-center justify-center overflow-hidden
+                        {{ $room->isPremium()
+                            ? 'bg-gradient-to-br from-blue-800 to-blue-600'
+                            : 'bg-gradient-to-br from-gray-600 to-gray-500' }}">
+                            @if ($room->image)
+                                <img src="{{ Storage::url($room->image) }}" alt="Kamar {{ $room->room_number }}"
+                                    class="w-full h-full object-cover">
+                            @else
+                                <svg class="w-16 h-16 text-white/20" fill="none" stroke="currentColor"
+                                    stroke-width="1" viewBox="0 0 24 24">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                                </svg>
+                            @endif
+
+                            {{-- Type Badge --}}
+                            <div class="absolute top-3 left-3">
+                                @if ($room->isPremium())
+                                    <span
+                                        class="inline-flex items-center gap-1 bg-yellow-500 text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm">
+                                        ⭐ Premium
+                                    </span>
+                                @else
+                                    <span
+                                        class="inline-flex items-center bg-white/20 backdrop-blur-sm text-white text-xs font-medium px-2.5 py-1 rounded-full border border-white/30">
+                                        Standard
+                                    </span>
+                                @endif
+                            </div>
+
+                            {{-- Status Badge --}}
+                            <div class="absolute top-3 right-3">
+                                <span
+                                    class="inline-flex items-center gap-1 text-white text-xs font-medium px-2.5 py-1 rounded-full
+                                {{ $room->isAvailable() ? 'bg-green-500' : 'bg-red-500' }}">
+                                    <span
+                                        class="w-1.5 h-1.5 rounded-full bg-white {{ $room->isAvailable() ? 'animate-pulse' : '' }}"></span>
+                                    {{ $room->isAvailable() ? 'Tersedia' : 'Terisi' }}
+                                </span>
+                            </div>
+                        </div>
+
+                        {{-- Body --}}
+                        <div class="p-5">
+                            <div class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-1">
+                                {{ $room->isPremium() ? 'Premium Suite' : 'Standard Room' }}
+                            </div>
+                            <h3 class="font-semibold text-gray-900 dark:text-white text-lg mb-3">
+                                Kamar {{ $room->room_number }}
+                            </h3>
+
+                            {{-- Facilities --}}
+                            @if ($room->facilities->count() > 0)
+                                <div class="flex flex-wrap gap-1.5 mb-4">
+                                    @foreach ($room->facilities as $facility)
+                                        <span
+                                            class="text-xs bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800 px-2 py-0.5 rounded-md font-medium">
+                                            {{ $facility->name }}
+                                        </span>
+                                    @endforeach
+                                </div>
+                            @endif
+
+                            {{-- Footer --}}
+                            <div
+                                class="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-700">
+                                <div>
+                                    <span class="text-xl font-bold text-blue-600 dark:text-blue-400">
+                                        Rp {{ number_format($room->price, 0, ',', '.') }}
+                                    </span>
+                                    <span class="text-xs text-gray-400 dark:text-gray-500">/bulan</span>
+                                </div>
+
+                                <a href="{{ route('rooms.detail', $room->room_number) }}"
+                                    class="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
+                                    Detail
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                        viewBox="0 0 24 24">
+                                        <path d="M5 12h14M12 5l7 7-7 7" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-span-3 py-20 text-center">
+                        <div
+                            class="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
+                                stroke-width="1.5" viewBox="0 0 24 24">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                        <p class="text-gray-500 dark:text-gray-400 font-medium">Belum ada kamar tersedia saat ini</p>
+                        <p class="text-sm text-gray-400 dark:text-gray-500 mt-1">Silakan hubungi kami untuk informasi lebih
+                            lanjut</p>
+                    </div>
+                @endforelse
+            </div>
+
+            {{-- Empty state saat filter tidak ada hasil --}}
+            <div id="roomsEmpty" class="hidden py-20 text-center">
+                <div
+                    class="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
+                        stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                    </svg>
+                </div>
+                <p class="text-gray-500 dark:text-gray-400 font-medium">Tidak ada kamar untuk tipe ini</p>
+            </div>
+
+            {{-- CTA lihat semua --}}
+            @if ($availableRooms->count() >= 6)
+                <div class="text-center mt-10">
+
+                    <a href="{{ route('rooms') }}"
+                        class="inline-flex items-center gap-2 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-blue-500 dark:hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 font-medium px-6 py-2.5 rounded-xl transition-all duration-200">
+                        Lihat Semua Kamar
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+            @endif
+
+        </div>
+    </section>
+
+    {{-- Filter Script --}}
+    <script>
+        function filterRooms(type) {
+            const cards = document.querySelectorAll('.room-card');
+            const empty = document.getElementById('roomsEmpty');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const show = type === 'all' || card.dataset.type === type;
+                card.style.display = show ? 'block' : 'none';
+                if (show) visibleCount++;
+            });
+
+            // Tampilkan empty state jika tidak ada kamar
+            if (empty) {
+                empty.classList.toggle('hidden', visibleCount > 0);
+            }
+        }
+    </script>
+
 @endsection
