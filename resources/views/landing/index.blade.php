@@ -496,6 +496,76 @@
         </div>
     </section>
 
+    {{-- ============================================================
+     CTA SECTION
+    ============================================================ --}}
+    <section class="py-16 sm:py-20 bg-gray-50 dark:bg-gray-950">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="relative bg-blue-600 dark:bg-blue-700 rounded-3xl px-8 py-14 text-center overflow-hidden">
+
+                {{-- Decorative circles --}}
+                <div class="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-white/5 pointer-events-none"></div>
+                <div class="absolute -bottom-10 -left-10 w-36 h-36 rounded-full bg-white/5 pointer-events-none"></div>
+                <div
+                    class="absolute top-1/2 left-8 -translate-y-1/2 w-20 h-20 rounded-full bg-white/5 pointer-events-none">
+                </div>
+
+                <div class="relative">
+                    {{-- Label --}}
+                    <div
+                        class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white/90 text-xs font-medium px-3 py-1.5 rounded-full mb-6">
+                        <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+                        Siap Membantu Anda
+                    </div>
+
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">
+                        Siap Pindah ke Hunian Impian?
+                    </h2>
+                    <p class="text-blue-100 max-w-xl mx-auto mb-8 leading-relaxed text-sm sm:text-base">
+                        Hubungi kami sekarang untuk informasi ketersediaan kamar, tur langsung, atau konsultasi gratis
+                        bersama tim kami.
+                    </p>
+
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <a href="#kontak"
+                            class="inline-flex items-center gap-2 bg-white text-blue-700 font-semibold px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                            Hubungi Sekarang
+                        </a>
+                        <a href="#kamar"
+                            class="inline-flex items-center gap-2 border-2 border-white/40 hover:border-white text-white font-medium px-6 py-3 rounded-xl transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                            </svg>
+                            Lihat Kamar
+                        </a>
+                    </div>
+
+                    {{-- Stats bawah --}}
+                    <div class="mt-10 grid grid-cols-3 gap-4 max-w-sm mx-auto">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-white">10</div>
+                            <div class="text-xs text-blue-200 mt-0.5">Total Kamar</div>
+                        </div>
+                        <div class="text-center border-x border-white/20">
+                            <div class="text-2xl font-bold text-white">5★</div>
+                            <div class="text-xs text-blue-200 mt-0.5">Premium AC</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-white">H-3</div>
+                            <div class="text-xs text-blue-200 mt-0.5">Auto Alert</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     {{-- Filter Script --}}
     <script>
         function filterRooms(type) {
