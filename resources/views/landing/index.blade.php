@@ -566,6 +566,90 @@
         </div>
     </section>
 
+    {{-- ============================================================
+     FAQ SECTION
+    ============================================================ --}}
+    <section id="faq" class="py-16 sm:py-20 bg-white dark:bg-gray-900">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+
+            {{-- Header --}}
+            <div class="text-center mb-12">
+                <div
+                    class="inline-block text-xs font-semibold text-blue-600 dark:text-blue-400 tracking-widest uppercase mb-3">
+                    FAQ
+                </div>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-3">
+                    Pertanyaan yang Sering Ditanyakan
+                </h2>
+                <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                    Temukan jawaban dari pertanyaan yang paling sering ditanyakan oleh calon penghuni kami.
+                </p>
+            </div>
+
+            {{-- FAQ List --}}
+            <div class="space-y-3" x-data>
+                @foreach ($faqs as $i => $faq)
+                    <div x-data="{ open: {{ $i === 0 ? 'true' : 'false' }}, id: {{ $i }} }" x-on:faq-open.window="if ($event.detail.id !== id) open = false"
+                        class="border rounded-xl overflow-hidden transition-colors duration-200"
+                        x-bind:class="open
+                            ?
+                            'border-blue-300 dark:border-blue-700 bg-blue-50/50 dark:bg-blue-900/10' :
+                            'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900'">
+                        {{-- Question --}}
+                        <button x-on:click="open = !open; if (open) $dispatch('faq-open', { id: id })"
+                            class="w-full flex items-center justify-between px-5 py-4 text-left transition-colors">
+                            <span class="font-medium text-sm pr-4 transition-colors"
+                                x-bind:class="open
+                                    ?
+                                    'text-blue-700 dark:text-blue-300' :
+                                    'text-gray-900 dark:text-white'">
+                                {{ $faq['question'] }}
+                            </span>
+                            <span
+                                class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-200"
+                                x-bind:class="open
+                                    ?
+                                    'bg-blue-600 text-white rotate-180' :
+                                    'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400'">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5"
+                                    viewBox="0 0 24 24">
+                                    <polyline points="6 9 12 15 18 9" />
+                                </svg>
+                            </span>
+                        </button>
+
+                        {{-- Answer --}}
+                        <div x-show="open" x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 -translate-y-1"
+                            x-transition:enter-end="opacity-100 translate-y-0"
+                            x-transition:leave="transition ease-in duration-150"
+                            x-transition:leave-start="opacity-100 translate-y-0"
+                            x-transition:leave-end="opacity-0 -translate-y-1" class="px-5 pb-4">
+                            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                                {{ $faq['answer'] }}
+                            </p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            {{-- Bottom CTA --}}
+            <div class="mt-10 text-center">
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-3">
+                    Tidak menemukan jawaban yang kamu cari?
+                </p>
+                <a href="#kontak"
+                    class="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
+                    Hubungi kami langsung
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
     {{-- Filter Script --}}
     <script>
         function filterRooms(type) {
