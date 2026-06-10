@@ -83,11 +83,12 @@ class LandingController extends Controller
     public function contact(Request $request)
     {
         $request->validate([
-            'name'    => 'required|string|max:100',
-            'email'   => 'required|email',
-            'message' => 'required|string|max:1000',
+            'name'      => 'required|string|max:100',
+            'email'     => 'required|email',
+            'room_type' => 'nullable|string|in:standard,premium,any',
+            'message'   => 'required|string|max:1000',
         ]);
 
-        return back()->with('success', 'Pesan Anda berhasil dikirim! Kami akan menghubungi Anda segera.');
+        return back()->with('success', 'Pesan Anda berhasil dikirim! Kami akan menghubungi Anda dalam 1-2 jam pada jam kerja.');
     }
 }

@@ -650,6 +650,216 @@
         </div>
     </section>
 
+    {{-- ============================================================
+     CONTACT SECTION
+    ============================================================ --}}
+    <section id="kontak" class="py-16 sm:py-20 bg-gray-50 dark:bg-gray-950">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+
+                {{-- ===== KIRI — Info Kontak ===== --}}
+                <div>
+                    <div class="text-xs font-semibold text-blue-600 dark:text-blue-400 tracking-widest uppercase mb-3">
+                        Hubungi Kami
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                        Bicara dengan Tim Kami
+                    </h2>
+                    <p class="text-gray-500 dark:text-gray-400 leading-relaxed mb-8 text-sm sm:text-base">
+                        Punya pertanyaan khusus atau ingin melihat kamar langsung? Tim kami siap membantu Anda menemukan
+                        hunian yang tepat.
+                    </p>
+
+                    {{-- Contact Items --}}
+                    <div class="space-y-4 mb-8">
+
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-10 h-10 flex-shrink-0 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-xl flex items-center justify-center mt-0.5">
+                                <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none"
+                                    stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 dark:text-gray-500 mb-0.5">Telepon / WhatsApp</div>
+                                <div class="text-sm font-medium text-gray-900 dark:text-white">+62 899-9977-7755</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-10 h-10 flex-shrink-0 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-xl flex items-center justify-center mt-0.5">
+                                <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none"
+                                    stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 dark:text-gray-500 mb-0.5">Email</div>
+                                <div class="text-sm font-medium text-gray-900 dark:text-white">info@kosan.id</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-10 h-10 flex-shrink-0 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-xl flex items-center justify-center mt-0.5">
+                                <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none"
+                                    stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 dark:text-gray-500 mb-0.5">Lokasi</div>
+                                <div class="text-sm font-medium text-gray-900 dark:text-white">Jl. Raya Depok No. 45</div>
+                                <div class="text-xs text-gray-500 dark:text-gray-400">Depok, Jawa Barat</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-10 h-10 flex-shrink-0 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-xl flex items-center justify-center mt-0.5">
+                                <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none"
+                                    stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 dark:text-gray-500 mb-0.5">Jam Operasional</div>
+                                <div class="text-sm font-medium text-gray-900 dark:text-white">Senin — Sabtu</div>
+                                <div class="text-xs text-gray-500 dark:text-gray-400">08.00 — 17.00 WIB</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {{-- Info Card --}}
+                    <div class="bg-blue-600 dark:bg-blue-700 rounded-2xl p-5 text-white">
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold mb-1">Respon Cepat</p>
+                                <p class="text-xs text-blue-100 leading-relaxed">
+                                    Kami biasanya merespons dalam 1-2 jam pada jam kerja. Untuk urusan mendesak, hubungi via
+                                    WhatsApp.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- ===== KANAN — Form ===== --}}
+                <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 sm:p-8">
+
+                    {{-- Success Message --}}
+                    @if (session('success'))
+                        <div
+                            class="mb-6 flex items-start gap-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-400 px-4 py-3.5 rounded-xl">
+                            <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                                stroke-width="2" viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            <p class="text-sm">{{ session('success') }}</p>
+                        </div>
+                    @endif
+
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                            Kirim Pesan
+                        </h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            Isi form di bawah dan kami akan segera menghubungi Anda.
+                        </p>
+                    </div>
+
+                    <form action="{{ route('contact.send') }}" method="POST" class="space-y-4">
+                        @csrf
+
+                        {{-- Nama --}}
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                                Nama Lengkap <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" name="name" value="{{ old('name') }}"
+                                placeholder="Masukkan nama lengkap Anda"
+                                class="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 px-4 py-2.5 text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition">
+                            @error('name')
+                                <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        {{-- Email --}}
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                                Email <span class="text-red-500">*</span>
+                            </label>
+                            <input type="email" name="email" value="{{ old('email') }}"
+                                placeholder="email@anda.com"
+                                class="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 px-4 py-2.5 text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition">
+                            @error('email')
+                                <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        {{-- Tipe Kamar --}}
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                                Tipe Kamar yang Diminati
+                            </label>
+                            <select name="room_type"
+                                class="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 px-4 py-2.5 text-sm text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition">
+                                <option value="">Pilih tipe kamar...</option>
+                                <option value="standard" {{ old('room_type') === 'standard' ? 'selected' : '' }}>Standard
+                                </option>
+                                <option value="premium" {{ old('room_type') === 'premium' ? 'selected' : '' }}>Premium
+                                    (AC)</option>
+                                <option value="any" {{ old('room_type') === 'any' ? 'selected' : '' }}>Keduanya / Belum
+                                    tahu</option>
+                            </select>
+                        </div>
+
+                        {{-- Pesan --}}
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                                Pesan <span class="text-red-500">*</span>
+                            </label>
+                            <textarea name="message" rows="4" placeholder="Tulis pertanyaan atau pesan Anda di sini..."
+                                class="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 px-4 py-2.5 text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition resize-none">{{ old('message') }}</textarea>
+                            @error('message')
+                                <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        {{-- Submit --}}
+                        <button type="submit"
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition-colors flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z" />
+                            </svg>
+                            Kirim Pesan
+                        </button>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     {{-- Filter Script --}}
     <script>
         function filterRooms(type) {
